@@ -1,34 +1,61 @@
-const router = require('express').Router()
-const sequelize = require('../db')
-const ProjectModel = sequelize.import('../models/projects');
+const router = require('express').Router();
+const Projects = require('../db').import('../models/projects');
 
-router.get('/test', (req, res) => {
-    res.send('This is a response from our project controller')
+router.get('/', (req, res) => {
+    Projects.findAll({
+        where: {
+            owner: req.user.id
+        }
+    })
+    .then(projects => res.status(200).json(projects))
+    .catch(err => res.status(500).json({
+        error: err
+    }))
 })
 
 
-/***********************
-    CREATE NEW PROJECT
- ***********************/
-router.post('/add', (req, res) => {
-    let projectName = req.body.projectName;
-    let description = req.body.description;
-    let location = req.body.location;
-    let owner = req.body.owner;
-
-    ProjectModel
-    .create({
-        projectName: projectName,
-        description: description,
-        location: location,
-        owner: owner
-    })
-    .then( (data) => {
-        res.json({
-            project: data,
-            message: 'Project Created'
-        })
-    })
+router.post('/', (req, res) => {
+    const projectsFromRequest = {
+        projectName: req.body.projectName,
+        description: req.body.description,
+        location: req.body.location,
+        badge: req.body.badge,
+        owner: req.user.id
+    }
+    Projects.create(projectsFromRequest)
+    .then(projects => res.status(200).json(projects))
+    .catch(err => res.json({
+        error: err
+    }));
 })
 
-module.exports = router;
+
+router.get('/:badge', (req, res) => {
+    Projects.findAll({ where:  {
+        badge: req.params.badge,
+        owner: req.user.id}})
+    .then(projects => res.status(200).json(projects))
+    .catch(err => res.status(500).json({ error: err}))
+})
+
+router.put('/:id', (req, res) => {
+   Projects.update(req.body, { where: { id: req.params.id }})
+    .then((projects) => res.status(200).json(projects))
+    .catch(err => res.json({
+        error: err
+    }))
+})
+
+router.delete('/:id', (req, res) => {
+    Projects.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(projects => res.status(200).jsonp(projects))
+    .catch(err => res.json({
+        error: err
+    }))
+})
+
+module.exports = router

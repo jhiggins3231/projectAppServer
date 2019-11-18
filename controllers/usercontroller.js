@@ -1,71 +1,60 @@
 const router = require('express').Router();
-const sequelize = require('../db');
-const UserModel = sequelize.import('../models/user');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const User = require('../db').import('../models/user');
 
-router.get('/test', (req, res) => {
-    res.send('This is a response from our user controller')
+const bcrypt = require('bcryptjs');
+const jwt = require ('jsonwebtoken');
+
+
+//MAKE SURE URL FOR SIGNUP/SIGNIN HAS 3000/AUTH/SIGNUP ETC
+router.post('/signup', (req, res) => {
+    User.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 10)
+    })
+    .then(
+        createSuccess = (user) => {
+            let token = jwt.sign({ id: user.id}, process.env.JWT_SECRET, {
+                expiresIn: 60 * 60 * 24
+            })
+            res.json({
+                user: user, 
+                message: "User Created",
+                sessionToken: token
+            })
+        },
+        createError = err => res.send(500, err)
+    )
 })
 
-/****************************** 
-    CREATE NEW USER ROUTE
-*******************************/
 
-router.post('/create', (req, res) => {
-    let username = req.body.username;
-    let email = req.body.email;
-    let password = req.body.password;
-
-    UserModel
-    .create({
-        username: username,
-        email: email,
-        password: bcrypt.hashSync(password, 10)
+router.post('/signin', (req, res) => {
+    User.findOne({
+        where: {
+            username: req.body.username,
+        }
     })
-    .then( (user) => {
-        let token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: 60*60*24})
-
-        res.json({
-            user: user,
-            message: 'User Created',
-            sessionToken: token
-        })
-    })
-    .catch(err => res.send(err))
-});
-
-
-/******************* 
-    LOGIN ROUTE
-********************/
-router.post('/login', (req, res) => {
-
-    UserModel.findOne({
-        where: {email: req.body.user.email}
-    })
-    .then( (user) => {
-        if(user) {
-            bcrypt.compare(req.body.user.password, user.password, (err, matches) => {
-                if(matches) {
-                    let token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: 60*60*24})
+    .then(user => {
+        if(user){
+            bcrypt.compare(req.body.password, user.password, (err, matches) => {
+                if(matches){
+                    let token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {
+                        expiresIn: 60 * 60 * 24
+                    })
                     res.json({
                         user: user,
-                        message: 'Successfully Authenticated',
+                        message: 'Succesfully authenticated user',
                         sessionToken: token
-                    });
+                    })
                 } else {
-                    res.status(502).send({error: 'Error 502: Bad Gateway'})
+                    res.status(502).send({error: 'bad gateway'})
                 }
-            });
+            })
         } else {
-            res.status(500).send({error: 'Could not verify user'})
+            res.status(500).send({error: 'Failed to Authenticate'})
         }
-    },
-    function (err) {
-        res.status(501).send({error: 'User not found'})
-    }
-    )
-});
+    }, err => res.status(501).send({error: 'Failed to process'}))
+})
+
 
 module.exports = router;
