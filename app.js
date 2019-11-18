@@ -7,7 +7,8 @@ const sequelize = require('./db');
 // //Routes
 const user = require('./controllers/usercontroller');
 const projects = require('./controllers/projectcontroller');
-const test = require('./controllers/testcontroller')
+const test = require('./controllers/testcontroller');
+const comments = require('./controllers/commentscontroller');
 
 
 sequelize.sync();
@@ -17,8 +18,12 @@ app.use(express.json());
 // //Endpoints
 app.use('/auth', user);
 app.use(require('./middleware/validateSession'))
+
+// Protected Endpoints //
+
 app.use('/projects', projects);
-app.use('/test', test)
+app.use('/comments', comments)
+app.use('/test', test);
 
 app.listen(3000, function(){
   console.log('Test Test Test')
