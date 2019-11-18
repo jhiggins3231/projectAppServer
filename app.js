@@ -2,24 +2,28 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
+const sequelize = require('./db');
 
 // //Routes
 const user = require('./controllers/usercontroller');
 const projects = require('./controllers/projectcontroller');
-const test = require('./controllers/testcontroller')
+const test = require('./controllers/testcontroller');
+const comments = require('./controllers/commentscontroller');
 
 
-const sequelize = require('./db');
-sequelize.sync(); /*pass in {force: true} to clear tables */
-app.use(require('./middleware/headers'));
+sequelize.sync();
 app.use(express.json());
 
 
 // //Endpoints
 app.use('/auth', user);
 app.use(require('./middleware/validateSession'))
+
+// Protected Endpoints //
+
 app.use('/projects', projects);
-app.use('/test', test)
+app.use('/comments', comments)
+app.use('/test', test);
 
 app.listen(3000, function(){
   console.log('Test Test Test')

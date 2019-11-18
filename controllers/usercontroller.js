@@ -5,7 +5,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require ('jsonwebtoken');
 
 
-//MAKE SURE URL FOR SIGNUP/SIGNIN HAS 3000/AUTH/SIGNUP ETC
+/*********************
+    CREATE NEW USER
+**********************/
+
 router.post('/signup', (req, res) => {
     User.create({
         username: req.body.username,
@@ -27,6 +30,10 @@ router.post('/signup', (req, res) => {
     )
 })
 
+
+/*********************
+    LOGIN USER
+**********************/
 
 router.post('/signin', (req, res) => {
     User.findOne({
