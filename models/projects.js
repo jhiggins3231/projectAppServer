@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
         owner: {
             type: DataTypes.INTEGER,
             allowNull: false,
+        },
+        badge: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
 })
-return Wishlist;
+return Projects;
 }
