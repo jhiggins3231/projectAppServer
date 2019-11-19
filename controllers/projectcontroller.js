@@ -40,7 +40,7 @@ router.post('/add', (req, res) => {
     GET ALL PROJECTS BY BADGE
  *****************************/
 
-router.get('find/:badge', (req, res) => {
+router.get('/find/:badge', (req, res) => {
     Projects.findAll({ where:  {
         badge: req.params.badge,
         owner: req.user.id}})

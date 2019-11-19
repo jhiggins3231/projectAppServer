@@ -1,25 +1,27 @@
 module.exports = (sequelize, DataTypes) => {
-    const Projects = sequelize.define('projects', {
-        projectName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        location: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        owner: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        badge: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        }
-})
-return Projects;
-}
+  const Projects = sequelize.define('posts', {
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false
+    },
+    user_id: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
+    content: {
+      type: DataTypes.TEXT,
+      required: true
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updated_at:  DataTypes.DATE,
+    deleted_at: DataTypes.DATE
+  }, {
+    underscored: true
+  });
+  return Projects;
+};
