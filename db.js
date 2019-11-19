@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+
 const sequelize = new Sequelize('RedBadge', 'postgres', '1qaz!QAZ', {
     host: 'localhost',
     dialect: 'postgres'
