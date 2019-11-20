@@ -5,19 +5,24 @@ const bcrpyt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
+
+router.get('/test', (req, res) => {
+    res.status(200).send('This is a test')
+})
+
+
 /***************************
     CREATE A NEW USER
 ****************************/
 router.post('/signup', (req, res) => {
 
     const created_at = new Date();
-    const newUser = req.body.user;
+    const newUser = req.body;
 
     db.users.create({
         username: newUser.username,
         email: newUser.email,
         password: bcrpyt.hashSync(newUser.password, 10),
-        // role: newUser.role,
         created_at: created_at
     })
     .then(
@@ -28,6 +33,7 @@ router.post('/signup', (req, res) => {
                 message: 'user created',
                 sessionToken: token
             })
+            console.log('The error is here')
         },
         error = err => res.send(500, err)
     )

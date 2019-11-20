@@ -10,6 +10,7 @@ const express = require('express');
     validateSession = require('./middleware/validateSession');
 
 const app = express(); // Declaring a variable and setting its value to allows us access to express application methods
+app.use(require('./middleware/headers'))
 const PORT = env.PORT; // Declaring a variable and setting its value to the PORT value stored in our env object using dot notation
 
 app.use(express.json()); // Giving all routes underneath access to the express json() method, allowing us to parse json data
