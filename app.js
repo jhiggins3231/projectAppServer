@@ -1,3 +1,6 @@
+/*
+  - Lines (4-10): Declaring a constant variable and storing the imports of our, express, env file, db file, validateSession file and controller files
+*/
 const express = require('express');
     env = require('./config/env');
     db = require('./config/db');
@@ -6,18 +9,27 @@ const express = require('express');
     comments = require('./controllers/commentscontroller');
     validateSession = require('./middleware/validateSession');
 
-const app = express();
-const PORT = env.PORT;
+const app = express(); // Declaring a variable and setting its value to allows us access to express application methods
+const PORT = env.PORT; // Declaring a variable and setting its value to the PORT value stored in our env object using dot notation
 
-app.use(express.json());
+app.use(express.json()); // Giving all routes underneath access to the express json() method, allowing us to parse json data
 
-app.use('/auth', users);
-app.use(validateSession);
-app.use('/projects', projects);
-app.use('/comments', comments);
+app.use('/auth', users); // Route leading to our userscontroller and the endpoints within
+app.use(validateSession); // Any routes stored below must pass through our sessionValidation before they can be accessed
+app.use('/projects', projects); // Route leading to our projectscontroller and the endpoints within
+app.use('/comments', comments); // Route leading to our commentscontroller and the endpoints within
 
 db.sequelize.sync().then(() => {
     app.listen(PORT, () => {
       console.log('Express listening on port:', PORT);
   });
 });
+
+/*
+  - db is our database object, we created this in our config/db.js file and imported it at the top of this module
+  - db.sequelize.sync() breakdown: Using . notation we dig into our db object and grab the value of sequelize, which creates a new sql table.
+  - .sync() is a sequelize method that syncs all defined models to our database
+  - Using a .then() promise resolver to fire a function after our database syncs
+  - Using app.listen, an express method that listens for connections, and passing our PORT variable to tell it where to listen
+  - If we connect to the PORT variable (in this case port 3000) console.log a response
+*/

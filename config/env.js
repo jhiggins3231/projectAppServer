@@ -1,4 +1,4 @@
-const env = {
+const env = { // Declaring a variable and setting it to be an object
     PORT: process.env.PORT || 3000,
     DATABASE_NAME: 'RedBadgeDatabase',
     DATABASE_HOST: 'localhost',
@@ -11,4 +11,6 @@ const env = {
     NODE_ENV: process.env.NODE_ENV || 'development',
   };
   
-  module.exports = env;
+  module.exports = env; // Exporting our obejct for user in other files
+
+  // lines (2-11) setting up our objects key/value pairings
