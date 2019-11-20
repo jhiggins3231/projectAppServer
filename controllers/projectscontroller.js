@@ -29,11 +29,11 @@ router.post('/post', (req, res) => {
 
 
 router.get('/:badge', (req, res) => {
-    db.projects.findAll({ where:  {
-        badge: req.params.badge}})
-    .then(projects => res.status(200).json(projects))
-    .catch(err => res.status(500).json({ error: err}))
- })
+   Projects.findAll({ where:  {
+       badge: req.params.badge}})
+   .then(projects => res.status(200).json(projects))
+   .catch(err => res.status(500).json({ error: err}))
+})
 
 /********************************************
     VIEW ALL PROJECTS WITH COMMENTS BY USER
