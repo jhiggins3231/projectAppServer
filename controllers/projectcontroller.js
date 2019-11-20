@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
         description: req.body.description,
         location: req.body.location,
         badge: req.body.badge,
-        owner: req.user.id
+        // owner: req.user.id
     }
     Projects.create(projectsFromRequest)
     .then(projects => res.status(200).json(projects))

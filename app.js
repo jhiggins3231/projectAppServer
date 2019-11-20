@@ -6,7 +6,6 @@ const app = express();
 // //Routes
 const user = require('./controllers/usercontroller');
 const projects = require('./controllers/projectcontroller');
-const test = require('./controllers/testcontroller')
 
 
 const sequelize = require('./db');
@@ -19,7 +18,6 @@ app.use(express.json());
 app.use('/auth', user);
 app.use(require('./middleware/validateSession'))
 app.use('/projects', projects);
-app.use('/test', test)
 
 app.listen(3000, function(){
   console.log('Test Test Test')
