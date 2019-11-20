@@ -1,28 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
-    const Projects = sequelize.define('projects', {
+    const Comments = sequelize.define('comments', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
-        user_id: { // When a new project is created, the UUID of our user is automatically grabbed and attached here.
-            type: DataTypes.UUID, 
+        project_id: { // When a new comment is made, the project UUID is automatically grabbed and attached here
+            type: DataTypes.UUID,
             allowNull: false
         },
-        projectName: {
+        content: {
             type: DataTypes.TEXT,
             required: true
         },
-        location: {
-            type: DataTypes.STRING,
-            required: true
-        },
-        description: {
-            type: DataTypes.STRING,
-            required: true
-        },
-        badge: {
+        commenter_username: {
             type: DataTypes.STRING,
             required: true
         },
@@ -35,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         underscored: true
     });
-    return Projects;
+    return Comments;
 }
