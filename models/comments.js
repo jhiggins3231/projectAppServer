@@ -1,29 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-    const Users = sequelize.define('users', {
+    const Comments = sequelize.define('comments', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
-        username: {
-            type: DataTypes.STRING,
-            required: true,
-            unique: true
-        },
-        email: {
-            type: DataTypes.STRING,
-            required: true,
-            unique: true
-        },
-        password: {
-            type: DataTypes.STRING,
+        project_id: {
+            type: DataTypes.UUID,
             allowNull: false
         },
-        // role: {
-        //     type: DataTypes.ENUM,
-        //     values: ['user', 'admin', 'disabled']
-        // },
+        content: {
+            type: DataTypes.TEXT,
+            required: true
+        },
+        commenter_username: {
+            type: DataTypes.STRING,
+            required: true
+        },
         created_at: {
             type: DataTypes.DATE,
             allowNull: false
@@ -33,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         underscored: true
     });
-    return Users;
+    return Comments;
 }
