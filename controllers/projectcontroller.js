@@ -32,8 +32,7 @@ router.post('/', (req, res) => {
 
 router.get('/:badge', (req, res) => {
     Projects.findAll({ where:  {
-        badge: req.params.badge,
-        owner: req.user.id}})
+        badge: req.params.badge}})
     .then(projects => res.status(200).json(projects))
     .catch(err => res.status(500).json({ error: err}))
 })
