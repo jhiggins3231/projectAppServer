@@ -9,7 +9,7 @@ router.post('/post', (req, res) => {
     console.log(req);
 
     const created_at = new Date();
-    const newProject = req.body.post;
+    const newProject = req.body;
 
     db.projects.create({
             user_id: req.user.id,
@@ -28,14 +28,26 @@ router.post('/post', (req, res) => {
 });
 
 
-/***************************
-    VIEW ALL PROJECTS BY USER
-****************************/
+router.get('/:badge', (req, res) => {
+    db.projects.findAll({ where:  {
+        badge: req.params.badge}})
+    .then(projects => res.status(200).json(projects))
+    .catch(err => res.status(500).json({ error: err}))
+ })
+
+/********************************************
+    VIEW ALL PROJECTS WITH COMMENTS BY USER
+*********************************************/
 router.get('/view', (req, res) => {
     let owner = req.user.id
 
     db.projects.findAll({
-        where: {user_id: owner}
+        where: {user_id: owner},
+        include: [
+            {
+                model: db.comments
+            }
+        ]
     })
     .then( (projects => {
         res.status(200).json({projects: projects})

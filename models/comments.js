@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
-        project_id: {
+        project_id: { // When a new comment is made, the project UUID is automatically grabbed and attached here
             type: DataTypes.UUID,
             allowNull: false
         },

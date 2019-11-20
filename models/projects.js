@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
-        user_id: {
-            type: DataTypes.UUID,
+        user_id: { // When a new project is created, the UUID of our user is automatically grabbed and attached here.
+            type: DataTypes.UUID, 
             allowNull: false
         },
         projectName: {

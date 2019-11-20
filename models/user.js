@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define('users', {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.UUID, // UUID (Universally Unique Identifier) generates unique id
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
@@ -20,10 +20,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        // role: {
-        //     type: DataTypes.ENUM,
-        //     values: ['user', 'admin', 'disabled']
-        // },
         created_at: {
             type: DataTypes.DATE,
             allowNull: false
