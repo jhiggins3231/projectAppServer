@@ -46,7 +46,7 @@ router.post('/signup', (req, res) => {
 ****************************/
 router.post('/login', (req, res) => {
 
-    const loginUser = req.body.user;
+    const loginUser = req.body;
 
 
     db.users.findOne({
