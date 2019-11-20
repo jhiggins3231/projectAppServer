@@ -1,13 +1,15 @@
-const jwt = require('jsonwebtoken')
-const User = require('../db').import('../models/user')
+const jwt = require('jsonwebtoken');
+const db = require('../config/db');
+const env = require('../config/env')
+
 const validateSession = (req, res, next) => {
     if(req.method == 'OPTIONS') {
         next();
     } else {
         const token = req.headers.authorization
-        jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+        jwt.verify(token, env.JWT_SECRET, (err, decodedToken) => {
             if (!err && decodedToken) {
-                User.findOne({
+                db.users.findOne({
                         where: {
                             id: decodedToken.id
                         }
@@ -27,4 +29,5 @@ const validateSession = (req, res, next) => {
         })
     }
 }
-module.exports = validateSession
+
+module.exports = validateSession;
