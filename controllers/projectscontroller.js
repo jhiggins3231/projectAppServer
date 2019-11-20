@@ -9,7 +9,7 @@ router.post('/post', (req, res) => {
     console.log(req);
 
     const created_at = new Date();
-    const newProject = req.body.post;
+    const newProject = req.body;
 
     db.projects.create({
             user_id: req.user.id,
