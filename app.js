@@ -1,5 +1,5 @@
 /*
-  - Lines (4-10): Declaring a constant variable and storing the imports of our, express, env file, db file, validateSession file and controller files
+  - Lines (4-10): Declaring a variable and storing the imports of our, express dependency, env file, db file, validateSession file and controller files
 */
 const express = require('express');
     env = require('./config/env');
@@ -10,7 +10,7 @@ const express = require('express');
     validateSession = require('./middleware/validateSession');
 
 const app = express(); // Declaring a variable and setting its value to allows us access to express application methods
-app.use(require('./middleware/headers'))
+app.use(require('./middleware/headers')) // Recquiring headers to be sent with requests to the server, controlling who can interact with the server and how
 const PORT = env.PORT; // Declaring a variable and setting its value to the PORT value stored in our env object using dot notation
 
 app.use(express.json()); // Giving all routes underneath access to the express json() method, allowing us to parse json data
