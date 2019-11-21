@@ -67,7 +67,7 @@ router.get('/view', (req, res) => {
 ****************************/
 router.delete('/remove/:id', (req, res) => {
     db.projects.destroy({
-        where: {id: req.params.id}
+        where: {id: req.params.id, user_id: req.user.id}
     })
     .then( (data) => {
         res.status(200).json({message: `Deleted: ${data}`})
