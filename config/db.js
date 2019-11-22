@@ -22,8 +22,8 @@ db.projects = require('../models/projects')(sequelize, Sequelize); // adding the
 db.comments = require('../models/comments')(sequelize, Sequelize); // adding the comments model/table to the db object
 
 //Relations
-db.comments.belongsTo(db.projects);
-db.projects.hasMany(db.comments);
+db.comments.belongsTo(db.projects, {constraints: false});
+db.projects.hasMany(db.comments, {constraints: false});
 db.projects.belongsTo(db.users);
 db.users.hasMany(db.projects);
 
