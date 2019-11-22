@@ -75,6 +75,7 @@ router.delete('/remove/:id', (req, res) => {
     .then( (data) => {
         res.status(200).json({message: `Deleted: ${data}`})
     })
+    .catch(err => res.status(err))
 });
 
 
