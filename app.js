@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-require('dotenv').config();
-
-const express = require('express');
-const app = express();
-
-// //Routes
-const user = require('./controllers/usercontroller');
-const projects = require('./controllers/projectcontroller');
-
-
-const sequelize = require('./db');
-sequelize.sync(); /*pass in {force: true} to clear tables */
-app.use(require('./middleware/headers'));
-app.use(express.json());
-
-
-// //Endpoints
-app.use('/auth', user);
-app.use(require('./middleware/validateSession'))
-app.use('/projects', projects);
-
-app.listen(3000, function(){
-  console.log('Test Test Test')
-});
-
-app.use('/api/test', function(req, res){
-  res.send('This is data from the endpoint.');
-});
-=======
 /*
   - Lines (4-10): Declaring a constant variable and storing the imports of our, express, env file, db file, validateSession file and controller files
 */
@@ -50,7 +20,7 @@ app.use(validateSession); // Any routes stored below must pass through our sessi
 app.use('/projects', projects); // Route leading to our projectscontroller and the endpoints within
 app.use('/comments', comments); // Route leading to our commentscontroller and the endpoints within
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync().then(() => { 
     app.listen(PORT, () => {
       console.log('Express listening on port:', PORT);
   });
@@ -64,4 +34,3 @@ db.sequelize.sync().then(() => {
   - Using app.listen, an express method that listens for connections, and passing our PORT variable to tell it where to listen
   - If we connect to the PORT variable (in this case port 3000) console.log a response
 */
->>>>>>> 89be1299d9a50897fa447ff58d7a35a655dcc1fd

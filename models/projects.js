@@ -1,7 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     const Projects = sequelize.define('projects', {
-<<<<<<< HEAD
-=======
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
@@ -12,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.UUID, 
             allowNull: false
         },
->>>>>>> 89be1299d9a50897fa447ff58d7a35a655dcc1fd
         projectName: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -28,12 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         badge: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        owner: {
-            type: DataTypes.INTEGER,
-            allowNull: false
         }
-
     });
     return Projects;
 }

@@ -28,7 +28,8 @@ router.post('/post', (req, res) => {
 });
 
 
-router.get('/:badge', (req, res) => {
+router.get('/badge/:badge', (req, res) => {
+    console.log(req)
     db.projects.findAll({ where:  {
         badge: req.params.badge}})
     .then(projects => res.status(200).json(projects))

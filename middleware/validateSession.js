@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-const jwt = require('jsonwebtoken')
-const User = require('../db').import('../models/user')
-const validateSession = (req, res, next) => {
-    if(req.method == 'OPTIONS') {
-        next();
-    } else {
-        const token = req.headers.authorization
-        jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-            if (!err && decodedToken) {
-                User.findOne({
-                        where: {
-                            id: decodedToken.id
-=======
 const jwt = require('jsonwebtoken'); // Importing our jwt dependency
 const db = require('../config/db'); // Import our db object
 const env = require('../config/env') // Importing our env object
@@ -26,7 +12,6 @@ const validateSession = (req, res, next) => { // Declaring a new funcion, valida
                 db.users.findOne({ // digging into our db object to find a specific user in our users table
                         where: { // Telling the findOne() method where to look, keep in mind that where is always an object itself
                             id: decodedToken.id // looking for a match between id and the decodedToken.id in our users table
->>>>>>> 89be1299d9a50897fa447ff58d7a35a655dcc1fd
                         }
                     }, console.log(decodedToken)) // console.logs the token
                     .then(user => { // using a .then() promise resolver
@@ -44,9 +29,5 @@ const validateSession = (req, res, next) => { // Declaring a new funcion, valida
         })
     }
 }
-<<<<<<< HEAD
-module.exports = validateSession
-=======
 
 module.exports = validateSession; // exports the module for use in other files
->>>>>>> 89be1299d9a50897fa447ff58d7a35a655dcc1fd
