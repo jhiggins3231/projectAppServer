@@ -48,9 +48,6 @@ router.get('/badge/:badge', (req, res) => {
 router.get('/view', (req, res) => {
     let owner = req.user.id
     db.projects.findAll({
-        where: {
-            user_id: owner
-        },
         include: [
             {
                 model: db.comments
