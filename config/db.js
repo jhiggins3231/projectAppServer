@@ -4,7 +4,7 @@ const Sequelize = require('sequelize'); // Declaring a new variable and using it
 const sequelize = new Sequelize(env.DATABASE_NAME, env.DATABASE_USERNAME, env.DATABASE_PASSWORD, { // Declaring a new variable that will connect and interact with our database
     dialect: env.DATABASE_DIALECT
 })
-
+ 
 sequelize.authenticate() // Using .authenticate() to test our connection
     .then(() => console.log('postgres db is connected')) // If we console.log the string
     .catch(err => console.log(err)); // If we run into an error, console.log(the error)
@@ -22,8 +22,8 @@ db.projects = require('../models/projects')(sequelize, Sequelize); // adding the
 db.comments = require('../models/comments')(sequelize, Sequelize); // adding the comments model/table to the db object
 
 //Relations
-db.comments.belongsTo(db.projects);
-db.projects.hasMany(db.comments);
+db.comments.belongsTo(db.projects, {constraints: false});
+db.projects.hasMany(db.comments, {constraints: false});
 db.projects.belongsTo(db.users);
 db.users.hasMany(db.projects);
 

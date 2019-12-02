@@ -9,7 +9,7 @@ router.post('/post', (req, res) => {
     console.log(req);
 
     const created_at = new Date();
-    const newProject = req.body.post;
+    const newProject = req.body;
 
     db.projects.create({
             user_id: req.user.id,
@@ -28,21 +28,26 @@ router.post('/post', (req, res) => {
 });
 
 
-router.get('/:badge', (req, res) => {
-    db.projects.findAll({ where:  {
-        badge: req.params.badge}})
-    .then(projects => res.status(200).json(projects))
-    .catch(err => res.status(500).json({ error: err}))
- })
+/********************************************
+    VIEW ALL PROJECTS BY BADGE
+*********************************************/
+router.get('/badge/:badge', (req, res) => {
+   db.projects.findAll({ 
+       where:  {
+       badge: req.params.badge
+    }
+})
+   .then(projects => res.status(200).json(projects))
+   .catch(err => res.status(500).json({ error: err}))
+})
+
 
 /********************************************
     VIEW ALL PROJECTS WITH COMMENTS BY USER
 *********************************************/
 router.get('/view', (req, res) => {
     let owner = req.user.id
-
     db.projects.findAll({
-        where: {user_id: owner},
         include: [
             {
                 model: db.comments
@@ -50,7 +55,7 @@ router.get('/view', (req, res) => {
         ]
     })
     .then( (projects => {
-        res.status(200).json({projects: projects})
+        res.status(200).json(projects)
     }))
     .catch(err => res.status(err))
 });
@@ -61,11 +66,15 @@ router.get('/view', (req, res) => {
 ****************************/
 router.delete('/remove/:id', (req, res) => {
     db.projects.destroy({
-        where: {id: req.params.id}
+        where: {
+            id: req.params.id, 
+            user_id: req.user.id
+        }
     })
     .then( (data) => {
         res.status(200).json({message: `Deleted: ${data}`})
     })
+    .catch(err => res.status(err))
 });
 
 
