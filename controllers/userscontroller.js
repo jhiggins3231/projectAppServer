@@ -23,6 +23,7 @@ router.post('/signup', (req, res) => {
         username: newUser.username,
         email: newUser.email,
         password: bcrpyt.hashSync(newUser.password, 10),
+        role: newUser.role,
         created_at: created_at
     })
     .then(
