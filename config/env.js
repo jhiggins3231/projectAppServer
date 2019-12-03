@@ -6,7 +6,9 @@ const env = { // Declaring a variable and setting it to be an object
     DATABASE_PASSWORD: 'Bluelips32',
     DATABASE_DIALECT: 'postgres',
 
-    JWT_SECRET: 'I_AM_SECRET',
+    DATABASE_URL: 'postgresql://postgres:Bluelips32@localhost/RedBadgeDatabase',
+
+    JWT_SECRET: 'JUST_STAY_CLOSE_TO_THE_WATER',
   
     NODE_ENV: process.env.NODE_ENV || 'development',
   };
