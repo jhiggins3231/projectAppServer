@@ -4,7 +4,7 @@ const Sequelize = require('sequelize'); // Declaring a new variable and using it
 const sequelize = new Sequelize(env.DATABASE_URL, { // Declaring a new variable that will connect and interact with our database
     dialect: env.DATABASE_DIALECT
 })
-
+ 
 sequelize.authenticate() // Using .authenticate() to test our connection
     .then(() => console.log('postgres db is connected')) // If we console.log the string
     .catch(err => console.log(err)); // If we run into an error, console.log(the error)

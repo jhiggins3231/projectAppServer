@@ -11,29 +11,21 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         projectName: {
-            type: DataTypes.TEXT,
-            required: true
-        },
-        location: {
             type: DataTypes.STRING,
-            required: true
+            allowNull: false,
         },
         description: {
             type: DataTypes.STRING,
-            required: true
+            allowNull: false,
+        },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         badge: {
             type: DataTypes.STRING,
-            required: true
-        },
-        created_at: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        updated_at: DataTypes.DATE,
-        deleted_at: DataTypes.DATE
-    }, {
-        underscored: true
+            allowNull: false,
+        }
     });
     return Projects;
 }
