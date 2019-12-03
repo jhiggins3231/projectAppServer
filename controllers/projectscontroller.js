@@ -103,5 +103,21 @@ router.put('/edit/:id', (req, res) => {
     .catch(err => res.status(err))
 });
 
+/**************************
+    ADMIN REMOVE PROJECT
+***************************/
+
+router.delete('/adminremove/:id', (req, res) => {
+    db.projects.destroy({
+        where: {
+            id: req.params.id,
+        }
+    })
+    .then( (data) => {
+        res.status(200).json({message: `Deleted: ${data}`})
+    })
+    .catch(err => res.status(err))
+});
+
 
 module.exports = router;

@@ -93,4 +93,21 @@ router.get('/view/:id', (req, res) => {
     .catch(err => res.status(err))
 })
 
+/**************************
+    ADMIN REMOVE COMMENT
+***************************/
+
+router.delete('/adminremove/:id', (req, res) => {
+    db.comments.destroy({
+        where: {
+            id: req.params.id,
+        }
+    })
+    .then( (data) => {
+        res.status(200).json({message: `Deleted: ${data}`})
+    })
+    .catch(err => res.status(err))
+});
+
+
 module.exports = router;
