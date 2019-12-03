@@ -27,6 +27,7 @@ router.post('/post', (req, res) => {
         })
 });
 
+
 /*******************************
     VIEW ALL PROJECTS BY BADGE
 ********************************/
@@ -39,6 +40,7 @@ router.get('/badge/:badge', (req, res) => {
    .then(projects => res.status(200).json(projects))
    .catch(err => res.status(500).json({ error: err}))
 })
+
 
 /***********************************
     VIEW ALL PROJECTS WITH COMMENTS

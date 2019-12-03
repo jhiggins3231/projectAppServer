@@ -20,7 +20,7 @@ app.use(validateSession); // Any routes stored below must pass through our sessi
 app.use('/projects', projects); // Route leading to our projectscontroller and the endpoints within
 app.use('/comments', comments); // Route leading to our commentscontroller and the endpoints within
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync().then(() => { 
     app.listen(PORT, () => {
       console.log('Express listening on port:', PORT);
   });
