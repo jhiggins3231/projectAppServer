@@ -28,9 +28,9 @@ router.post('/post', (req, res) => {
 });
 
 
-/********************************************
+/*******************************
     VIEW ALL PROJECTS BY BADGE
-*********************************************/
+********************************/
 router.get('/badge/:badge', (req, res) => {
    db.projects.findAll({ 
        where:  {
@@ -42,9 +42,9 @@ router.get('/badge/:badge', (req, res) => {
 })
 
 
-/********************************************
-    VIEW ALL PROJECTS WITH COMMENTS BY USER
-*********************************************/
+/***********************************
+    VIEW ALL PROJECTS WITH COMMENTS
+************************************/
 router.get('/view', (req, res) => {
     let owner = req.user.id
     db.projects.findAll({
@@ -102,6 +102,22 @@ router.put('/edit/:id', (req, res) => {
         updated: update,
         message: 'Project Updated'
     }))
+    .catch(err => res.status(err))
+});
+
+/**************************
+    ADMIN REMOVE PROJECT
+***************************/
+
+router.delete('/adminremove/:id', (req, res) => {
+    db.projects.destroy({
+        where: {
+            id: req.params.id,
+        }
+    })
+    .then( (data) => {
+        res.status(200).json({message: `Deleted: ${data}`})
+    })
     .catch(err => res.status(err))
 });
 
