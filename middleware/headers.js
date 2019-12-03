@@ -7,4 +7,3 @@ module.exports = (req, res, next) => { // Exporting our headers for use in other
 }
 // lines(2-4) Establishing our headers
 // line (6) moves us to the next step\\
-///////
