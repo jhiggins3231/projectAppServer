@@ -28,7 +28,9 @@ router.post('/post', (req, res) => {
 });
 
 
+
 /*******************************
+
     VIEW ALL PROJECTS BY BADGE
 ********************************/
 router.get('/badge/:badge', (req, res) => {
@@ -42,9 +44,11 @@ router.get('/badge/:badge', (req, res) => {
 })
 
 
+
 /***********************************
     VIEW ALL PROJECTS WITH COMMENTS
 ************************************/
+
 router.get('/view', (req, res) => {
     let owner = req.user.id
     db.projects.findAll({
