@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        role: {
+            type: DataTypes.ENUM,
+            values: ['user', 'admin', 'disabled']
+        },
         created_at: {
             type: DataTypes.DATE,
             allowNull: false

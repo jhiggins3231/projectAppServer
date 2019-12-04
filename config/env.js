@@ -1,13 +1,15 @@
 const env = { // Declaring a variable and setting it to be an object
-    PORT: process.env.PORT || 8080,
-    DATABASE_NAME: 'RedBadge',
-    DATABASE_HOST: 'localhost',
-    DATABASE_USERNAME:'postgres',
-    DATABASE_PASSWORD: '1qaz!QAZ',
-    DATABASE_DIALECT: 'postgres',
+    PORT: process.env.PORT || 3000,
+    DATABASE_NAME: process.env.DATABASE_NAME || 'RedBadge',
+    DATABASE_HOST: process.env.DATABASE_HOST || 'localhost',
+    DATABASE_USERNAME: process.env.DATABASE_USERNAME || 'postgres',
+    DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || 'Bluelips32',
+    DATABASE_DIALECT:  process.env.DATABASE_DIALECT || 'postgres',
 
-    JWT_SECRET: 'I_AM_SECRET',
-   
+    DATABASE_URL: process.env.DATABASE_URL || 'postgresql://postgres:Bluelips32@localhost/RedBadgeDatabase',
+
+    JWT_SECRET: process.env.JWT_SECRET || 'JUST_STAY_CLOSE_TO_THE_WATER',
+  
     NODE_ENV: process.env.NODE_ENV || 'development',
   };
   
