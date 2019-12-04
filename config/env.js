@@ -1,5 +1,5 @@
 const env = { // Declaring a variable and setting it to be an object
-    PORT: process.env.PORT || 3000,
+    PORT: process.env.PORT || 8080,
     DATABASE_NAME: 'RedBadge',
     DATABASE_HOST: 'localhost',
     DATABASE_USERNAME:'postgres',
