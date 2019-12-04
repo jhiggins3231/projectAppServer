@@ -1,7 +1,7 @@
 const env = require('./env'); // Importing our env object
 
 const Sequelize = require('sequelize'); // Declaring a new variable and using it to hold our sequelize dependency
-const sequelize = new Sequelize(env.DATABASE_NAME, env.DATABASE_USERNAME, env.DATABASE_PASSWORD, { // Declaring a new variable that will connect and interact with our database
+const sequelize = new Sequelize(env.DATABASE_URL, { // Declaring a new variable that will connect and interact with our database
     dialect: env.DATABASE_DIALECT
 })
  
